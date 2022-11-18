@@ -26,5 +26,9 @@ cd tutorial5 && clean && cd ..
 cd tutorial5a && clean && cd ..
 }
 
-clean_all
-run_all
+# COMMANDS useful with "source compile.sh"
+
+# clean_all
+# run_all
+# clean
+# run
