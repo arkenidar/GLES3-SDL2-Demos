@@ -2,8 +2,8 @@
  * g++ main.cpp shader.cpp `pkg-config --cflags --libs sdl2 glesv2`
  */
 
-#include <SDL.h>
-#include <SDL_opengles2.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_opengles2.h>
 #include <GLES3/gl3.h>
 #include <cstdio>
 #include <cstdlib>

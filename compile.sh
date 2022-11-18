@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function run {
-g++ *.cpp $( pkg-config --cflags --libs sdl2 SDL2_image glesv2 glm ) -I/usr/include/SDL2 && ./a.out
+g++ *.cpp $( pkg-config --cflags --libs sdl2 SDL2_image glesv2 glm ) && ./a.out
 }
 
 function run_all {
@@ -14,7 +14,7 @@ cd tutorial5a && run && cd ..
 }
 
 function clean {
-rm a.out
+rm -f a.out
 }
 
 function clean_all {
