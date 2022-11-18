@@ -13,4 +13,18 @@ cd tutorial5 && run && cd ..
 cd tutorial5a && run && cd ..
 }
 
+function clean {
+rm a.out
+}
+
+function clean_all {
+cd tutorial1 && clean && cd ..
+cd tutorial2 && clean && cd ..
+cd tutorial3 && clean && cd ..
+cd tutorial4 && clean && cd ..
+cd tutorial5 && clean && cd ..
+cd tutorial5a && clean && cd ..
+}
+
+clean_all
 run_all
