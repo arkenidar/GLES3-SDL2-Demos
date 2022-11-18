@@ -57,12 +57,7 @@ int SDL_main(int argc, char *args[]) {
 				cout << "Couldn't create an OpenGL context.\n";
 				return EXIT_FAILURE;
 			}
-	// Clear to black
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
 	
-	// Update the window
-	SDL_GL_SwapWindow(window);
 	
 	// Wait for the user to quit
 	bool quit = false;
@@ -74,6 +69,14 @@ int SDL_main(int argc, char *args[]) {
 							quit = true;
 						}
 				}
+
+		// Clear to black
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		
+		// Update the window
+		SDL_GL_SwapWindow(window);
+	
 		}
 		
 		return EXIT_SUCCESS;

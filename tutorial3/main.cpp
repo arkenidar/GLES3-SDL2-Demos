@@ -165,22 +165,7 @@ int SDL_main(int argc, char *args[]) {
 	glVertexAttribPointer(texCoordIdx, 2, GL_FLOAT, GL_FALSE,
 		sizeof(Vertex), (const GLvoid*)offsetof(Vertex, texCoord));
 	glEnableVertexAttribArray(texCoordIdx);
-	// Now draw!
 	
-	glDrawArrays(GL_TRIANGLE_FAN, 0, numVertices);
-	
-	// Update the window
-	
-	SDL_GL_SwapWindow(window);
-	
-	// Cleanup
-	
-	vboFree(triangleVBO);
-	triangleVBO = 0;
-	shaderProgDestroy(shaderProg);
-	shaderProg = 0;
-	texDestroy(texture); // Delete texture
-	texture = 0;
 	
 	// Wait for the user to quit
 	bool quit = false;
@@ -192,8 +177,27 @@ int SDL_main(int argc, char *args[]) {
 					quit = true;
 				}
 			}
+
+		// Now draw!
+		
+		glDrawArrays(GL_TRIANGLE_FAN, 0, numVertices);
+		
+		// Update the window
+		
+		SDL_GL_SwapWindow(window);
+	
 	}
 	
+
+	// Cleanup
+	
+	vboFree(triangleVBO);
+	triangleVBO = 0;
+	shaderProgDestroy(shaderProg);
+	shaderProg = 0;
+	texDestroy(texture); // Delete texture
+	texture = 0;
+
 	return EXIT_SUCCESS;
 }
 

@@ -153,14 +153,6 @@ int SDL_main(int argc, char *args[]) {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	
-	// Clear to black
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClearDepthf(1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-	// Update the window
-	SDL_GL_SwapWindow(window);
-	
 
 	// Load the shader program and set it for use
 	
@@ -389,8 +381,13 @@ int SDL_main(int argc, char *args[]) {
 		glUniformMatrix4fv(mvMatLoc, 1, GL_FALSE, glm::value_ptr(mvMat));
 		glUniformMatrix4fv(normalMatLoc, 1, GL_FALSE, glm::value_ptr(normalMat));
 		
-		// Redraw
+		
+		// Clear to black
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearDepthf(1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		// Redraw
 		glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, (GLvoid*)0);
 		
 		// Update the window (flip the buffers)

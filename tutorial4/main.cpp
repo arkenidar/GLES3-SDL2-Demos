@@ -146,13 +146,6 @@ int SDL_main(int argc, char *args[]) {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	
-	// Clear to black
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClearDepthf(1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-	// Update the window
-	SDL_GL_SwapWindow(window);
 	
 
 	// Load the shader program and set it for use
@@ -298,24 +291,6 @@ int SDL_main(int argc, char *args[]) {
 	glm::mat4 mvpMat = projMat * viewMat * modelMat;
 	glUniformMatrix4fv(mvpMatrixLoc, 1, GL_FALSE, glm::value_ptr(mvpMat));
 	
-	// Now draw!
-	
-	glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, (GLvoid*)0);
-	
-	// Update the window
-	
-	SDL_GL_SwapWindow(window);
-	
-	// Cleanup
-	
-	vboFree(triangleVBO);
-	triangleVBO = 0;
-	shaderProgDestroy(shaderProg);
-	shaderProg = 0;
-	texDestroy(texture); // Delete texture
-	texture = 0;
-	iboFree(ibo);
-	ibo = 0;
 	
 	// Wait for the user to quit
 	bool quit = false;
@@ -327,7 +302,35 @@ int SDL_main(int argc, char *args[]) {
 					quit = true;
 				}
 			}
+
+
+	// Clear to black
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearDepthf(1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+
+	// Now draw!
+	
+	glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, (GLvoid*)0);
+	
+	// Update the window
+	
+	SDL_GL_SwapWindow(window);
+	
+
 	}
+
+	// Cleanup
+	
+	vboFree(triangleVBO);
+	triangleVBO = 0;
+	shaderProgDestroy(shaderProg);
+	shaderProg = 0;
+	texDestroy(texture); // Delete texture
+	texture = 0;
+	iboFree(ibo);
+	ibo = 0;
 	
 	return EXIT_SUCCESS;
 }

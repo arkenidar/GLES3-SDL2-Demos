@@ -143,20 +143,8 @@ int SDL_main(int argc, char *args[]) {
 	glVertexAttribPointer(positionIdx, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) 0);
 	glEnableVertexAttribArray(positionIdx);
 	
-	// Now draw!
 	
-	glDrawArrays(GL_TRIANGLES, 0, numVertices);
-	
-	// Update the window
-	
-	SDL_GL_SwapWindow(window);
-	
-	// Cleanup
-	
-	vboFree(triangleVBO);
-	triangleVBO = 0;
-	shaderProgDestroy(shaderProg);
-	shaderProg = 0;
+
 	
 	// Wait for the user to quit
 	bool quit = false;
@@ -168,7 +156,25 @@ int SDL_main(int argc, char *args[]) {
 					quit = true;
 				}
 			}
+
+		// Now draw!
+		
+		glDrawArrays(GL_TRIANGLES, 0, numVertices);
+		
+		// Update the window
+		
+		SDL_GL_SwapWindow(window);
+		
+
 	}
+
+	
+	// Cleanup
+	
+	vboFree(triangleVBO);
+	triangleVBO = 0;
+	shaderProgDestroy(shaderProg);
+	shaderProg = 0;
 	
 	return EXIT_SUCCESS;
 }

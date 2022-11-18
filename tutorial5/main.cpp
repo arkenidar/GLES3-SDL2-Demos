@@ -148,14 +148,6 @@ int SDL_main(int argc, char *args[]) {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	
-	// Clear to black
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClearDepthf(1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-	// Update the window
-	SDL_GL_SwapWindow(window);
-	
 
 	// Load the shader program and set it for use
 	
@@ -346,13 +338,34 @@ int SDL_main(int argc, char *args[]) {
 	glUniform3fv(ambientColLoc, 1, glm::value_ptr(ambientCol));
 	glUniform3fv(diffuseColLoc, 1, glm::value_ptr(diffuseCol));
 	
-	// Now draw!
+
 	
-	glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, (GLvoid*)0);
-	
-	// Update the window
-	
-	SDL_GL_SwapWindow(window);
+
+	// Wait for the user to quit
+	bool quit = false;
+	while (!quit) {
+		SDL_Event event;
+		if (SDL_WaitEvent(&event) != 0) {
+				if (event.type == SDL_QUIT) {
+					// User wants to quit
+					quit = true;
+				}
+			}
+
+		// Clear to black
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearDepthf(1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		// Now draw!
+		
+		glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, (GLvoid*)0);
+		
+		// Update the window
+		
+		SDL_GL_SwapWindow(window);
+
+	}
 	
 	// Cleanup
 	
@@ -364,19 +377,7 @@ int SDL_main(int argc, char *args[]) {
 	texture = 0;
 	iboFree(ibo);
 	ibo = 0;
-	
-	// Wait for the user to quit
-	bool quit = false;
-	while (!quit) {
-		SDL_Event event;
-		if (SDL_WaitEvent(&event) != 0) {
-				if (event.type == SDL_QUIT) {
-					// User wants to quit
-					quit = true;
-				}
-			}
-	}
-	
+		
 	return EXIT_SUCCESS;
 }
 
